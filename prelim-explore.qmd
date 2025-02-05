@@ -1,0 +1,54 @@
+---
+title: "preliminary exploration"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+```{r}
+jedi_osw <- read_csv(here('data', 'first-jedi-outputs.csv'))
+
+osw_construction <- read_csv(here('data', 'sheet-2.csv')) |> 
+    clean_names()
+
+osw_opm <- read_csv(here('data', 'sheet-3.csv')) |> 
+    clean_names() 
+    
+    
+osw_opm_clean <- osw_opm |> 
+    filter(operations_and_maintenance_annual_ongoing %in% c('Technicians and Management',
+                                                            'Supply Chain/Support Services',
+                                                            'Induced')) |> 
+    rename(jobs = x3, earnings = x4, output = x5, value_added = x6) 
+
+osw_construction_clean <- osw_construction |> 
+    pivot_wider(names_from = c(x1, x2), values_from = jobs)
+2```
+
+```{r}
+ggplot(osw_opm_clean) +
+    geom_col(aes(x = operations_and_maintenance_annual_ongoing, y = jobs, fill = operations_and_maintenance_annual_ongoing)) +
+    theme_classic() +
+    coord_flip() +
+    labs(y = 'Number of Jobs',
+         x = 'Sector',
+         title = 'Operations and Maintenance Job \nGrowth in California with Offshore\n Wind Development',
+         caption = 'Source: NREL Jobs and Economic Development Impact (JEDI) Model \nfor Offshore Wind') +
+    theme(legend.position = 'bottom',
+          legend.text = element_blank(),
+          legend.title = element_blank(),
+          title = element_text(hjust = .5)) +
+    scale_fill_manual(values = c('#4766A1', '#579992','#c1d')) 
+    
+```
+```{r}
+
+```
+
+
+
