@@ -78,3 +78,44 @@ for (file in csv_files) {
 
 ```
 
+```{r}
+# New list of only pce normalized files
+norm_csv_files <- list.files(data_folder, pattern = "\\_norm.csv$", full.names = TRUE)
+```
+
+```{r}
+# Loop through each CSV file
+for (file in norm_csv_files) {
+    cat("Processing file: ", file, "\n")
+  # Read the CSV file
+  data <- read.csv(file)
+    
+    # Sort the data based on the correct_order
+    data <- data[match(correct_order, data$household_code), ]
+
+    electrical_index <- which(data$household_code == "Electrical Equipment")
+  
+  # Create a new row for Battery Manufacturing
+    new_row <- data[electrical_index, ]
+    new_row[] <- 0  # Set all values of the new row to 0
+    new_row$household_code <- "Battery Manufacturing"
+  
+    data <- rbind(
+        data[1:electrical_index, ],  # Rows before "Electrical Equipment"
+        new_row,  # The new row with "Battery Manufacturing" and 0 values
+        data[(electrical_index + 1):nrow(data), ]  # Rows after "Electrical Equipment"
+        )
+    # Write the modified data back to the same CSV file
+    #write.csv(data, file, row.names = FALSE)
+     modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
+  write.csv(data, modified_file, row.names = FALSE)
+  
+  cat("Saved modified data to:", modified_file, "\n")
+}
+
+```
+
+
+
+
+
