@@ -1,0 +1,80 @@
+---
+title: "pv-reorg"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# Load libraries
+library(here)
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+# Define the folder containing the CSV files
+data_folder <- here("data")
+
+# Define the correct order of the rows
+correct_order <- c(
+  "Agriculture",
+  "Mining",
+  "Construction",
+  "Construction - Nonresidential",
+  "Construction - Residential",
+  "Other Manufacturing",
+  "Fabricated Metals",
+  "Machinery",
+  "Electrical Equipment",
+  "Energy Wiring Manufacturing",
+  "Wholesale Trade",
+  "Retail trade",
+  "Transportation, Communication, and Public Utilities (TCPU)",
+  "Insurance and Real Estate",
+  "Finance",
+  "Other Professional Services",
+  "Office Services",
+  "Architectural and Engineering",
+  "Other Services",
+  "Government",
+  "Semiconductor and related devices"
+)
+
+# Get a list of all CSV files in the data folder
+csv_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
+
+```
+
+```{r}
+# Loop through each CSV file
+for (file in csv_files) {
+    cat("Processing file: ", file, "\n")
+  # Read the CSV file
+  data <- read.csv(file)
+    
+    # Sort the data based on the correct_order
+    data <- data[match(correct_order, data$Display.Description), ]
+
+    electrical_index <- which(data$Display.Description == "Electrical Equipment")
+  
+  # Create a new row for Battery Manufacturing
+    new_row <- data[electrical_index, ]
+    new_row[] <- 0  # Set all values of the new row to 0
+    new_row$Display.Description <- "Battery Manufacturing"
+  
+    data <- rbind(
+        data[1:electrical_index, ],  # Rows before "Electrical Equipment"
+        new_row,  # The new row with "Battery Manufacturing" and 0 values
+        data[(electrical_index + 1):nrow(data), ]  # Rows after "Electrical Equipment"
+        )
+    # Write the modified data back to the same CSV file
+    #write.csv(data, file, row.names = FALSE)
+     modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
+  write.csv(data, modified_file, row.names = FALSE)
+  
+  cat("Saved modified data to:", modified_file, "\n")
+}
+
+```
+
