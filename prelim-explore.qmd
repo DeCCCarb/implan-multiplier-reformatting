@@ -35,7 +35,7 @@ ggplot(osw_opm_clean) +
     geom_col(aes(x = operations_and_maintenance_annual_ongoing, y = jobs, fill = operations_and_maintenance_annual_ongoing)) +
     theme_classic() +
     coord_flip() +
-    labs(y = 'Number of Jobs',
+    labs(y = 'Number of Jobs Per Year',
          x = 'Sector',
          title = 'Operations and Maintenance Job \nGrowth in California with Offshore\n Wind Development',
          caption = 'Source: NREL Jobs and Economic Development Impact (JEDI) Model \nfor Offshore Wind') +
@@ -47,7 +47,17 @@ ggplot(osw_opm_clean) +
     
 ```
 ```{r}
+installation <- osw_construction |> 
+    filter(x2 %in% c('Foundation', 'Scour Protection', 'Turbine', 'Array and Export Cabling', 'Other')) |> 
+    rename(installation_activities = x2) |> 
+    select(-x1) |> 
+    mutate(jobs = as.integer(jobs))
 
+
+ggplot(installation) +
+    geom_col(aes(x = installation_activities, y = jobs, fill = jobs)) +
+    theme_classic() 
+    # scale_fill_discrete(limits = c('Foundation', 'Scour Protection', 'Turbine', 'Array and Export Cabling', 'Other'), values = '#1E91D6', '#2D3047', '#FAC748', '#F44708', '#878E88')
 ```
 
 
