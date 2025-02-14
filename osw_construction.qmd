@@ -5,6 +5,7 @@ format: html
 
 ```{r}
 library(ggplot2)
+library(gtsummary)
 ```
 
 
@@ -47,6 +48,19 @@ print(capacity_table)
 
 ```{r}
 ggplot(capacity_table, aes(x = year, y = total_capacity)) +
-    geom_point()
+    geom_point() +
+    labs(x = 'Year',
+         y = 'Total Capacity (GW)',
+         title = 'High Ambition Offshore Wind Energy Targets') +
+    theme_minimal()
 ```
+
+```{r}
+chart <- capacity_table |> 
+    dplyr::select(year, total_capacity, new_capacity) |> 
+    gt::gt()
+
+chart
+```
+
 

@@ -17,7 +17,7 @@ library(janitor)
 options(scipen=999)
 
 # Read in IMPLAN personal consumption expenditures for each county and clean
-pce_sb <- read_csv(here("data", "pv_household_local_commodity_demand_SB.csv")) |>
+pce_sb <- read_csv(here("data", "sb-pce.csv")) |>
     select("...2", "Household Code", "...13") |>
     
     # Remove first 2 rows and last row
@@ -32,7 +32,7 @@ pce_sb <- read_csv(here("data", "pv_household_local_commodity_demand_SB.csv")) |
     mutate(pce_dollar = gsub("[\\$,]", "", pce_dollar),
            pce_dollar = as.numeric(pce_dollar))
 
-pce_slo <- read_csv(here("data", "pv_household_local_commodity_demand_SLO.csv")) |>
+pce_slo <- read_csv(here("data", "slo-pce.csv")) |>
         select("...2", "Household Code", "...13") |>
    # Remove first 2 rows and last row
     slice(c(3:23)) |>
@@ -47,7 +47,7 @@ pce_slo <- read_csv(here("data", "pv_household_local_commodity_demand_SLO.csv"))
            pce_dollar = as.numeric(pce_dollar))
 
 
-pce_ventura <- read_csv(here("data", "pv_household_local_commodity_demand_VENTURA.csv")) |>
+pce_ventura <- read_csv(here("data", "ventura-pce.csv")) |>
         select("...2", "Household Code", "...13") |>
 # Remove first 2 rows and last row
     slice(c(3:23)) |>
@@ -69,8 +69,8 @@ pce_slo$pce_percent <- pce_slo$pce_dollar / sum(pce_slo$pce_dollar)
 pce_ventura$pce_percent <- pce_ventura$pce_dollar / sum(pce_ventura$pce_dollar)
 
 # Save to CSV
-write.csv(pce_sb, "~/MEDS/capstone/IMPLAN PV Multipliers SB/sb_pce_multipliers_norm.csv")
-write.csv(pce_slo, "~/MEDS/capstone/IMPLAN PV Multipliers SLO/slo_pce_multipliers_norm.csv")
-write.csv(pce_ventura, "~/MEDS/capstone/IMPLAN PV Multipliers VENTURA/ventura_pce_multipliers_norm.csv")
+write.csv(pce_sb, "~/MEDS/capstone/PV Multipliers/sb-pce-norm.csv")
+write.csv(pce_slo, "~/MEDS/capstone/PV Multipliers/slo-pce-norm.csv")
+write.csv(pce_ventura, "~/MEDS/capstone/PV Multipliers/ventura-pce-norm.csv")
 ```
 
