@@ -27,7 +27,7 @@ correct_order <- c(
   "Construction",
   "Construction: Non-residential",
   "Construction: residential",
-  "Manufacturing",
+  "Manufaturing",
   "Fabricated metals",
   "Machinery",
   "Electrical Equip",
@@ -41,7 +41,7 @@ correct_order <- c(
   "Other Professional Services",
   "Office Services",
   "Architectural and Engineering Services",
-  "Other Services",
+  "Other Professional Services",
   "Government",
   "Semiconductor (solar cell/module) manufacturing"
 )
