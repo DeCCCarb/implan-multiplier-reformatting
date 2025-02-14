@@ -1,0 +1,27 @@
+"X","code","household_code","pce_dollar","pce_percent"
+1,3001,"Agriculture and Forestry",24589673.72,0.00901560209976101
+2,3002,"Oil and Gas Extraction and Distribution",0,0
+3,3003,"Non-Fuel Mining and Quarrying",27113.81,0.0000099410559551142
+4,3004,"Coal Mining",0,0
+5,3005,"Nuclear Mining",0,0
+6,3006,"Electric Power Generation",0,0
+7,3007,"Electric TSD",6536783.32,0.00239665796693925
+8,3008,"Other Utilities and Pipeline",89218318.79,0.0327111645066704
+10,3010,"power construction",0,0
+11,3011,"Road Construction",0,0
+9,3009,"General construction",0,0
+12,3012,"other manufacturing",236448083.07,0.0866917494914348
+13,3013,"fiberglass and lightweight material manufacturing",27420.07,0.0000100533436711089
+14,3014,"Cement and Concrete product manufacturing",14132.48,0.00000518155782844728
+15,3015,"metal and wire manufacturing",7111.09,0.00000260722279870859
+16,3016,"mechanical components",14.87,0.00000000545196348475364
+17,3017,"semiconductors and batteries",536.74,0.000000196791316799372
+18,3018,"electrical components",1406.91,0.000000515832007150958
+19,3019,"trade",2046352914.88,0.750278504966035
+20,3020,"land transportation",317070769.07,0.116251395766805
+21,3021,"water transportation",7163460.32,0.00262642394681383
+NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA

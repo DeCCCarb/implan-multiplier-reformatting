@@ -1,0 +1,22 @@
+"","code","household_code","pce_dollar","pce_percent"
+"1","3001","Agriculture and Forestry",57155456.91,0.00811456841606777
+"2","3002","Oil and Gas Extraction and Distribution",0,0
+"3","3003","Non-Fuel Mining and Quarrying",97892.18,0.0000138981093836561
+"4","3004","Coal Mining",0,0
+"5","3005","Nuclear Mining",0,0
+"6","3006","Electric Power Generation",0,0
+"7","3007","Electric TSD",76162828.62,0.0108131142153481
+"8","3008","Other Utilities and Pipeline",252061173.96,0.0357860430431607
+"9","3009","General construction",0,0
+"10","3010","power construction",0,0
+"11","3011","Road Construction",0,0
+"12","3012","other manufacturing",86152567.06,0.0122313937710106
+"13","3013","fiberglass and lightweight material manufacturing",86445.44,0.0000122729740091423
+"14","3014","Cement and Concrete product manufacturing",992.33,0.000000140884704832229
+"15","3015","metal and wire manufacturing",36911.06,0.00000524039764306701
+"16","3016","mechanical components",26586.72,0.00000377461348508774
+"17","3017","semiconductors and batteries",111350.79,0.0000158088772706514
+"18","3018","electrical components",9469.88,0.00000134447335926217
+"19","3019","trade",6061025655.83,0.86050589068372
+"20","3020","land transportation",490585601.67,0.069650224911289
+"21","3021","water transportation",20047979.16,0.00284628462954791
