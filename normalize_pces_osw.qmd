@@ -1,0 +1,77 @@
+---
+title: "normalize_pces_osw"
+format: html
+---
+
+```{r}
+# Load libraries
+library(here)
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+# Set option to prevent scientific notation
+options(scipen=999)
+
+# Read in IMPLAN personal consumption expenditures for each county and clean
+pce_sb <- read_csv(here("data","osw-pce", "osw-multipliers-sb-pce.csv")) |>
+    select("...2", "Household Code", "...13") |>
+    
+    # Remove first 2 rows and last row
+    slice(c(3:23)) |>
+    
+    # Rename columns
+    rename("code" = "...2",
+           "household_code" = "Household Code",
+           "pce_dollar" = "...13") |>
+    
+    # Reformat currency column
+    mutate(pce_dollar = gsub("[\\$,]", "", pce_dollar),
+           pce_dollar = as.numeric(pce_dollar))
+```
+
+```{r}
+pce_slo <- read_csv(here("data","osw-pce", "osw-multipliers-slo-pce.csv")) |>
+        select("...2", "Household Code", "...13") |>
+   # Remove first 2 rows and last row
+    slice(c(3:23)) |>
+    
+    # Rename columns
+    rename("code" = "...2",
+           "household_code" = "Household Code",
+           "pce_dollar" = "...13") |>
+    
+    # Reformat currency column
+    mutate(pce_dollar = gsub("[\\$,]", "", pce_dollar),
+           pce_dollar = as.numeric(pce_dollar))
+```
+
+```{r}
+pce_ventura <- read_csv(here("data","osw-pce", "osw-multipliers-ventura-pce.csv")) |>
+        select("...2", "Household Code", "...13") |>
+# Remove first 2 rows and last row
+    slice(c(3:23)) |>
+    
+    # Rename columns
+    rename("code" = "...2",
+           "household_code" = "Household Code",
+           "pce_dollar" = "...13") |>
+    
+    # Reformat currency column
+    mutate(pce_dollar = gsub("[\\$,]", "", pce_dollar),
+           pce_dollar = as.numeric(pce_dollar))
+```
+
+```{r}
+# Normalize pce_dollar to a percentage
+pce_sb$pce_percent <- pce_sb$pce_dollar / sum(pce_sb$pce_dollar)
+pce_slo$pce_percent <- pce_slo$pce_dollar / sum(pce_slo$pce_dollar)
+pce_ventura$pce_percent <- pce_ventura$pce_dollar / sum(pce_ventura$pce_dollar)
+
+# Save to CSV
+write.csv(pce_sb, "~/Downloads/MEDS/Capstone/preliminary-exploration/data/osw-pce/sb-pce-norm.csv")
+write.csv(pce_slo, "~/Downloads/MEDS/Capstone/preliminary-exploration/data/osw-pce/slo-pce-norm.csv")
+write.csv(pce_ventura, "~/Downloads/MEDS/Capstone/preliminary-exploration/data/osw-pce/ventura-pce-norm.csv")
+```
+
