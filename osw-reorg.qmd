@@ -75,26 +75,24 @@ for (file in csv_files) {
 
 ```
 
-# ```{r}
-# # New list of only pce normalized files
-# norm_csv_files <- list.files(data_folder, pattern = "\\_norm.csv$", full.names = TRUE)
-# ```
-# 
-# ```{r}
-# # Loop through each CSV file
-# for (file in norm_csv_files) {
-#     cat("Processing file: ", file, "\n")
-#   # Read the CSV file
-#   data <- read.csv(file)
-#     
-#     # Sort the data based on the correct_order
-#     data <- data[match(correct_order, data$household_code), ]
-# 
-#     # Write the modified data back to the same CSV file
-#      modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
-#   write.csv(data, modified_file, row.names = FALSE)
-#   
-#   cat("Saved modified data to:", modified_file, "\n")
-# }
-# 
-# ```
+```{r}
+# New list of only pce normalized files
+norm_csv_files <- list.files(osw_raw_data_folder, pattern = "\\-norm.csv$", full.names = TRUE)
+# Loop through each CSV file
+for (file in norm_csv_files) {
+    cat("Processing file: ", file, "\n")
+  # Read the CSV file
+  data <- read.csv(file)
+    
+    # Sort the data based on the correct_order
+    data <- data[match(correct_order, data$household_code), ]
+
+    # Write the modified data back to the same CSV file
+    modified_file <- gsub("\\.csv$", "_m.csv", file)  # Add a suffix to the file name
+  write.csv(data, modified_file, row.names = FALSE)
+  
+  cat("Saved modified data to:", modified_file, "\n")
+}
+
+```
+
