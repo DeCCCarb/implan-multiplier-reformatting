@@ -14,8 +14,12 @@ library(janitor)
 
 ```{r}
 # Define the folder containing the CSV files
-data_folder <- here("data")
+pv_raw_data_folder <- here("data/pv-multipliers-raw")
+pv_modified_data_folder <- here("data/pv-multipliers-modified")
+pv_pce_data_folder <- here("data/pv-pce")
+```
 
+```{r}
 # Define the correct order of the rows
 correct_order <- c(
   "Agriculture",
@@ -27,6 +31,7 @@ correct_order <- c(
   "Fabricated Metals",
   "Machinery",
   "Electrical Equipment",
+  "Battery Manufacturing",
   "Energy Wiring Manufacturing",
   "Wholesale Trade",
   "Retail trade",
@@ -40,9 +45,11 @@ correct_order <- c(
   "Government",
   "Semiconductor and related devices"
 )
+```
 
+```{r}
 # Get a list of all CSV files in the data folder
-csv_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
+csv_files <- list.files(pv_raw_data_folder, pattern = "\\.csv$", full.names = TRUE)
 
 ```
 
@@ -56,66 +63,37 @@ for (file in csv_files) {
     # Sort the data based on the correct_order
     data <- data[match(correct_order, data$Display.Description), ]
 
-    electrical_index <- which(data$Display.Description == "Electrical Equipment")
+     #modified_file <- gsub("\\.csv$", "_m.csv", file)  # Add a suffix to the file name
+     
+  write.csv(data, pv_modified_data_folder , row.names = FALSE)
   
-  # Create a new row for Battery Manufacturing
-    new_row <- data[electrical_index, ]
-    new_row[] <- 0  # Set all values of the new row to 0
-    new_row$Display.Description <- "Battery Manufacturing"
-  
-    data <- rbind(
-        data[1:electrical_index, ],  # Rows before "Electrical Equipment"
-        new_row,  # The new row with "Battery Manufacturing" and 0 values
-        data[(electrical_index + 1):nrow(data), ]  # Rows after "Electrical Equipment"
-        )
-    # Write the modified data back to the same CSV file
-    #write.csv(data, file, row.names = FALSE)
-     modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
-  write.csv(data, modified_file, row.names = FALSE)
-  
-  cat("Saved modified data to:", modified_file, "\n")
 }
 
 ```
 
-```{r}
-# New list of only pce normalized files
-norm_csv_files <- list.files(data_folder, pattern = "\\_norm.csv$", full.names = TRUE)
-```
-
-```{r}
-# Loop through each CSV file
-for (file in norm_csv_files) {
-    cat("Processing file: ", file, "\n")
-  # Read the CSV file
-  data <- read.csv(file)
-    
-    # Sort the data based on the correct_order
-    data <- data[match(correct_order, data$household_code), ]
-
-    electrical_index <- which(data$household_code == "Electrical Equipment")
-  
-  # Create a new row for Battery Manufacturing
-    new_row <- data[electrical_index, ]
-    new_row[] <- 0  # Set all values of the new row to 0
-    new_row$household_code <- "Battery Manufacturing"
-  
-    data <- rbind(
-        data[1:electrical_index, ],  # Rows before "Electrical Equipment"
-        new_row,  # The new row with "Battery Manufacturing" and 0 values
-        data[(electrical_index + 1):nrow(data), ]  # Rows after "Electrical Equipment"
-        )
-    # Write the modified data back to the same CSV file
-    #write.csv(data, file, row.names = FALSE)
-     modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
-  write.csv(data, modified_file, row.names = FALSE)
-  
-  cat("Saved modified data to:", modified_file, "\n")
-}
-
-```
-
-
-
+# ```{r}
+# # New list of only pce normalized files
+# norm_csv_files <- list.files(pv_pce_data_folder, pattern = "\\-norm.csv$", full.names = TRUE)
+# ```
+# 
+# ```{r}
+# # Loop through each CSV file
+# for (file in norm_csv_files) {
+#     cat("Processing file: ", file, "\n")
+#   # Read the CSV file
+#   data <- read.csv(file)
+#     
+#     # Sort the data based on the correct_order
+#     data <- data[match(correct_order, data$household_code), ]
+# 
+#     # Write the modified data back to the same CSV file
+#   #   modified_file <- gsub("\\.csv$", "_m.csv", file)  # Add a suffix to the file name
+#  
+#      write.csv(data, , row.names = FALSE)
+#   
+#   cat("Saved modified data to:", modified_file, "\n")
+# }
+# 
+# ```
 
 
