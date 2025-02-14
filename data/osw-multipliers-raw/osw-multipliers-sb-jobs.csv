@@ -1,0 +1,28 @@
+,Display Code,Display Description,Direct Effects,Indirect Effects,Induced Effects,Type I Effects,Type SAM Effects
+1,1,Agriculture and Forestry,11.90,0.67,2.13,12.57,14.70
+2,2,Oil and Gas Extraction and Distribution,0.84,1.54,0.84,2.38,3.22
+3,4,Coal Mining,,,,,
+4,3,Non-Fuel Mining and Quarrying,1.53,1.03,0.87,2.56,3.43
+5,5,Nuclear Mining,,,,,
+6,6,Electric Power Generation,1.55,1.20,1.26,2.75,4.01
+7,7,Electric TSD,0.81,1.55,0.93,2.36,3.29
+8,8,Other Utilities and Pipeline,0.99,1.83,0.97,2.82,3.79
+9,9,General construction,5.84,1.16,1.69,7.00,8.70
+10,10,power construction,5.78,1.02,1.68,6.79,8.47
+11,11,Road Construction,5.30,1.04,1.58,6.34,7.92
+12,23,warehousing and storage,4.63,1.53,1.44,6.15,7.60
+13,12,other manufacturing,2.15,1.55,1.03,3.70,4.73
+14,13,fiberglass and lightweight material manufacturing,,,,,
+15,14,Cement and Concrete product manufacturing,2.63,1.67,1.10,4.30,5.40
+16,15,metal and wire manufacturing,3.16,1.67,1.25,4.84,6.09
+17,16,mechanical components,3.02,1.06,1.08,4.08,5.17
+18,17,semiconductors and batteries,1.18,1.89,1.12,3.08,4.20
+19,18,electrical components,2.56,1.41,1.09,3.97,5.05
+20,19,trade,4.62,1.62,1.42,6.24,7.66
+21,20,land transportation,6.71,1.66,1.64,8.38,10.02
+22,21,water transportation,1.26,2.61,1.52,3.87,5.39
+23,22,information and general services,4.86,1.60,1.61,6.45,8.06
+24,24,finance,4.00,2.21,1.42,6.21,7.63
+25,25,engineering legal professional,4.93,1.81,2.15,6.75,8.90
+26,26,leisure hospitality and recreation,9.55,1.81,1.66,11.36,13.01
+27,27,government non utility and other,6.11,0.61,2.28,6.73,9.00

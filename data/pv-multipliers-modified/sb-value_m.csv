@@ -1,0 +1,23 @@
+"X","Display.Code","Display.Description","Direct.Effects","Indirect.Effects","Induced.Effects","Type.I.Effects","Type.SAM.Effects"
+1,1,"Agriculture","806,870.36","65,143.86","241,120.93","872,014.22","1,113,135.15"
+2,2,"Mining","572,096.17","170,841.38","94,937.55","742,937.55","837,875.10"
+4,3,"Construction","569,817.66","137,577.11","193,734.82","707,394.77","901,129.59"
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+10,8,"Machinery","402,868.13","159,615.39","134,398.33","562,483.52","696,881.86"
+NA,NA,NA,NA,NA,NA,NA,NA
+12,10,"Battery Manufacturing","","","","",""
+NA,NA,NA,NA,NA,NA,NA,NA
+14,12,"Wholesale Trade","572,819.68","231,996.55","150,115.66","804,816.23","954,931.88"
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+18,15,"Insurance and Real Estate","664,967.55","181,834.69","119,588.76","846,802.24","966,391.00"
+17,16,"Finance","517,276.86","262,763.80","168,916.71","780,040.66","948,957.36"
+19,17,"Other Professional Services","609,686.12","224,329.65","234,922.84","834,015.77","1,068,938.61"
+20,18,"Office Services","640,403.55","202,016.01","206,145.99","842,419.56","1,048,565.55"
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+22,21,"Government","820,777.26","75,612.78","261,345.01","896,390.04","1,157,735.05"
+NA,NA,NA,NA,NA,NA,NA,NA

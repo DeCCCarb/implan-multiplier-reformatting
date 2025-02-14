@@ -1,0 +1,23 @@
+"X","Display.Code","Display.Description","Direct.Effects","Indirect.Effects","Induced.Effects","Type.I.Effects","Type.SAM.Effects"
+1,1,"Agriculture",12.05,0.41,2.06,12.47,14.53
+2,2,"Mining",0.77,1.31,0.74,2.08,2.83
+4,3,"Construction",5.91,1.09,1.66,7,8.66
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+10,8,"Machinery",2.21,1.28,1.29,3.49,4.79
+NA,NA,NA,NA,NA,NA,NA,NA
+12,10,"Battery Manufacturing",2.24,0.91,1.19,3.15,4.34
+NA,NA,NA,NA,NA,NA,NA,NA
+14,12,"Wholesale Trade",1.97,1.99,1.23,3.96,5.18
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+18,15,"Insurance and Real Estate",2.23,1.57,0.82,3.8,4.62
+17,16,"Finance",4.86,2.16,1.64,7.02,8.65
+19,17,"Other Professional Services",4.06,1.7,2.09,5.75,7.84
+20,18,"Office Services",6.36,1.85,1.74,8.21,9.95
+NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA
+22,21,"Government",6.14,0.18,2.33,6.31,8.65
+NA,NA,NA,NA,NA,NA,NA,NA

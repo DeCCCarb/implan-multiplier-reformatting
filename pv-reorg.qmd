@@ -63,9 +63,11 @@ for (file in csv_files) {
     # Sort the data based on the correct_order
     data <- data[match(correct_order, data$Display.Description), ]
 
-     #modified_file <- gsub("\\.csv$", "_m.csv", file)  # Add a suffix to the file name
+     modified_file <- gsub("\\.csv$", "_m.csv", basename(file))  # Add a suffix to the file name
      
-  write.csv(data, pv_modified_data_folder , row.names = FALSE)
+     file_path <- file.path(pv_modified_data_folder, modified_file)
+     
+  write.csv(data, file_path, row.names = FALSE)
   
 }
 
