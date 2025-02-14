@@ -12,35 +12,46 @@ library(janitor)
 
 ```{r}
 # Define the folder containing the CSV files
-data_folder <- here("data/osw-multipliers-raw")
+osw_raw_data_folder <- here("data/osw-multipliers-raw")
+osw_modified_data_folder <- here("data/osw-multipliers-modified")
+osw_pce_data_folder <- here("data/osw-pce")
+```
 
+```{r}
 # Define the correct order of the rows
 correct_order <- c(
-  "Agriculture",
-  "Mining",
-  "Construction",
-  "Construction - Nonresidential",
-  "Construction - Residential",
-  "Other Manufacturing",
-  "Fabricated Metals",
-  "Machinery",
-  "Electrical Equipment",
-  "Energy Wiring Manufacturing",
-  "Wholesale Trade",
-  "Retail trade",
-  "Transportation, Communication, and Public Utilities (TCPU)",
-  "Insurance and Real Estate",
-  "Finance",
-  "Other Professional Services",
-  "Office Services",
-  "Architectural and Engineering",
-  "Other Services",
-  "Government",
-  "Semiconductor and related devices"
+    "Agriculture and Forestry",
+    "Oil and Gas Extraction and Distribution",
+    "Non-Fuel Mining and Quarrying",
+    "Coal Mining",
+    "Nuclear Mining",
+    "Electric Power Generation",
+    "Electric TSD",
+    "Other Utilities and Pipeline", # this is Non Elec Utilities in JEDI
+    "power construction", # this is Power Communication Construction in JEDI
+    "Road Construction",
+    "General construction", # this is building construction in JEDI
+    "other manufacturing",
+    "fiberglass and lightweight material manufacturing",
+    "Cement and Concrete product manufacturing",
+    "metal and wire manufacturing",
+    "mechanical components",
+    "semiconductors and batteries",
+    "electrical components",
+    "trade",
+    "land transportation",
+    "water transportation",
+    "information and general services",
+    "finance",
+    "engineering legal professional",
+    "leisure hospitality and recreation",
+    "government non utility and other"
 )
+```
 
+```{r}
 # Get a list of all CSV files in the data folder
-csv_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
+csv_files <- list.files(osw_raw_data_folder, pattern = "\\.csv$", full.names = TRUE)
 
 ```
 
@@ -54,61 +65,36 @@ for (file in csv_files) {
     # Sort the data based on the correct_order
     data <- data[match(correct_order, data$Display.Description), ]
 
-    electrical_index <- which(data$Display.Description == "Electrical Equipment")
+     modified_file <- gsub("\\.csv$", "_m.csv", basename(file))  # Add a suffix to the file name
+     
+     file_path <- file.path(osw_modified_data_folder, modified_file)
+     
+  write.csv(data, file_path, row.names = FALSE)
   
-  # Create a new row for Battery Manufacturing
-    new_row <- data[electrical_index, ]
-    new_row[] <- 0  # Set all values of the new row to 0
-    new_row$Display.Description <- "Battery Manufacturing"
-  
-    data <- rbind(
-        data[1:electrical_index, ],  # Rows before "Electrical Equipment"
-        new_row,  # The new row with "Battery Manufacturing" and 0 values
-        data[(electrical_index + 1):nrow(data), ]  # Rows after "Electrical Equipment"
-        )
-    # Write the modified data back to the same CSV file
-    #write.csv(data, file, row.names = FALSE)
-     modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
-  write.csv(data, modified_file, row.names = FALSE)
-  
-  cat("Saved modified data to:", modified_file, "\n")
 }
 
 ```
 
-```{r}
-# New list of only pce normalized files
-norm_csv_files <- list.files(data_folder, pattern = "\\_norm.csv$", full.names = TRUE)
-```
-
-```{r}
-# Loop through each CSV file
-for (file in norm_csv_files) {
-    cat("Processing file: ", file, "\n")
-  # Read the CSV file
-  data <- read.csv(file)
-    
-    # Sort the data based on the correct_order
-    data <- data[match(correct_order, data$household_code), ]
-
-    electrical_index <- which(data$household_code == "Electrical Equipment")
-  
-  # Create a new row for Battery Manufacturing
-    new_row <- data[electrical_index, ]
-    new_row[] <- 0  # Set all values of the new row to 0
-    new_row$household_code <- "Battery Manufacturing"
-  
-    data <- rbind(
-        data[1:electrical_index, ],  # Rows before "Electrical Equipment"
-        new_row,  # The new row with "Battery Manufacturing" and 0 values
-        data[(electrical_index + 1):nrow(data), ]  # Rows after "Electrical Equipment"
-        )
-    # Write the modified data back to the same CSV file
-    #write.csv(data, file, row.names = FALSE)
-     modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
-  write.csv(data, modified_file, row.names = FALSE)
-  
-  cat("Saved modified data to:", modified_file, "\n")
-}
-
-```
+# ```{r}
+# # New list of only pce normalized files
+# norm_csv_files <- list.files(data_folder, pattern = "\\_norm.csv$", full.names = TRUE)
+# ```
+# 
+# ```{r}
+# # Loop through each CSV file
+# for (file in norm_csv_files) {
+#     cat("Processing file: ", file, "\n")
+#   # Read the CSV file
+#   data <- read.csv(file)
+#     
+#     # Sort the data based on the correct_order
+#     data <- data[match(correct_order, data$household_code), ]
+# 
+#     # Write the modified data back to the same CSV file
+#      modified_file <- gsub("\\.csv$", "_modified.csv", file)  # Add a suffix to the file name
+#   write.csv(data, modified_file, row.names = FALSE)
+#   
+#   cat("Saved modified data to:", modified_file, "\n")
+# }
+# 
+# ```
