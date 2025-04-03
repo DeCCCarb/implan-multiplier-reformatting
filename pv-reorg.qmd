@@ -5,6 +5,10 @@ editor_options:
   chunk_output_type: console
 ---
 
+The purpose of this .qmd is to reorganize the IMPLAN multipliers for our Solar PV Projections to be in the correct format to be entered into JEDI. 
+
+To begin, as always, we have to load our necessary libraries. 
+
 ```{r}
 # Load libraries
 library(here)
@@ -12,12 +16,21 @@ library(tidyverse)
 library(janitor)
 ```
 
+Next, we are going to read in our folders.
+pv_raw_data_folder: raw IMPLAN mulitpliers, unedited
+pv_modified_data_folder: empty folder where we will write our our modified multipliers to
+
 ```{r}
-# Define the folder containing the CSV files
+# Define the folder containing the raw multiplier files
 pv_raw_data_folder <- here("data/pv-multipliers-raw")
+
+# Define new folder for our future modified multiplier files
 pv_modified_data_folder <- here("data/pv-multipliers-modified")
-pv_pce_data_folder <- here("data/pv-pce")
 ```
+
+Now we are going to define the correct order of the rows, as they are in the JEDI input section. Note that although the order aligns with JEDI, we are using the row names from IMPLAN. For example, row number 8 of the inputs is named "Other Utilities and Pipeline", but in JEDI that name is Non Elec Utilities. However, the row names will not be necessary for inputting into JEDI, it is only for our reorg purposes.
+
+** Note that this same reorg could be done for any other technology if necessary by reordering this correct_order list. For example, this list is different from the list for the Offshore Wind Reorg.
 
 ```{r}
 # Define the correct order of the rows
@@ -50,27 +63,33 @@ correct_order <- c(
 ```{r}
 # Get a list of all CSV files in the data folder
 csv_files <- list.files(pv_raw_data_folder, pattern = "\\.csv$", full.names = TRUE)
-
 ```
 
 ```{r}
 # Loop through each CSV file
 for (file in csv_files) {
-    cat("Processing file: ", file, "\n")
-  # Read the CSV file
-  data <- read.csv(file)
     
-    # Sort the data based on the correct_order
+    # Build in check to show which file is being processed
+    cat("Processing file: ", file, "\n")
+    
+    # Read the CSV file
+    data <- read.csv(file)
+    
+    # Sort the data so that the Display.Description column order matches the we defined above
     data <- data[match(correct_order, data$Display.Description), ]
+    
+    # Add a suffix to the file name
+    modified_file <- gsub("\\.csv$", "_m.csv", basename(file))  # Add a suffix to the file name
 
-     modified_file <- gsub("\\.csv$", "_m.csv", basename(file))  # Add a suffix to the file name
-     
-     file_path <- file.path(pv_modified_data_folder, modified_file)
-     
-  write.csv(data, file_path, row.names = FALSE)
-  
+    # Define file path where we will be writing out our newly modified files
+    file_path <- file.path(pv_modified_data_folder, modified_file)
+    
+    # Write out files
+    write.csv(data, file_path, row.names = FALSE)
+    
+    # Build in check to show modified file has been saved
+    cat("Saved modified data to:", modified_file, "\n")
+    
 }
 
 ```
-
-
