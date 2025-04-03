@@ -1,8 +1,13 @@
 ---
 title: "osw-reorg"
 format: html
+editor_options: 
+  chunk_output_type: console
 ---
 
+The purpose of this .qmd is to reorganize the IMPLAN multipliers for our Offshore Wind Projections to be in the correct format to be entered into JEDI. 
+
+To begin, as always, we have to load our necessary libraries. 
 ```{r}
 # Load libraries
 library(here)
@@ -10,12 +15,21 @@ library(tidyverse)
 library(janitor)
 ```
 
+Next, we are going to read in our folders.
+osw_raw_data_folder: raw IMPLAN mulitpliers, unedited
+osw_modified_data_folder: empty folder where we will write our our modified multipliers to
+
 ```{r}
-# Define the folder containing the CSV files
+# Define the folder containing the raw multiplier files
 osw_raw_data_folder <- here("data/osw-multipliers-raw")
+
+# Define new folder for our future modified multiplier files
 osw_modified_data_folder <- here("data/osw-multipliers-modified")
-osw_pce_data_folder <- here("data/osw-pce")
 ```
+
+Now we are going to define the correct order of the rows, as they are in the JEDI input section. Note that although the order aligns with JEDI, we are using the row names from IMPLAN. For example, row number 8 of the inputs is named "Other Utilities and Pipeline", but in JEDI that name is Non Elec Utilities. However, the row names will not be necessary for inputting into JEDI, it is only for our reorg purposes.
+
+** Note that this same reorg could be done for any other technology if necessary by reordering this correct_order list.
 
 ```{r}
 # Define the correct order of the rows
@@ -49,50 +63,40 @@ correct_order <- c(
 )
 ```
 
+Now, we want to extract our files from the folders we read in above in a list format so we can iterate through all of them. Remember that it is essential that we have already normalized our personal consumption expenditures (PCEs) in a different file. These files all end in norm.csv. However, using the `\\.csv$` pattern, we cover all of the csv's in the folder. 
+
 ```{r}
 # Get a list of all CSV files in the data folder
 csv_files <- list.files(osw_raw_data_folder, pattern = "\\.csv$", full.names = TRUE)
-
 ```
+
+Iterate through the list, building in checks to show when the file is being processed and when it has been properly dealt with. Once we correct the order, we are also going to add a suffix to the file name to ensure that we know it's been processed. Building in lots of checks!
 
 ```{r}
 # Loop through each CSV file
 for (file in csv_files) {
-    cat("Processing file: ", file, "\n")
-  # Read the CSV file
-  data <- read.csv(file)
     
-    # Sort the data based on the correct_order
+    # Build in check to show which file is being processed
+    cat("Processing file: ", file, "\n")
+    
+    # Read the CSV file
+    data <- read.csv(file)
+    
+    # Sort the data so that the Display.Description column order matches the we defined above
     data <- data[match(correct_order, data$Display.Description), ]
-
-     modified_file <- gsub("\\.csv$", "_m.csv", basename(file))  # Add a suffix to the file name
-     
-     file_path <- file.path(osw_modified_data_folder, modified_file)
-     
-  write.csv(data, file_path, row.names = FALSE)
-  
-}
-
-```
-
-```{r}
-# New list of only pce normalized files
-norm_csv_files <- list.files(osw_raw_data_folder, pattern = "\\-norm.csv$", full.names = TRUE)
-# Loop through each CSV file
-for (file in norm_csv_files) {
-    cat("Processing file: ", file, "\n")
-  # Read the CSV file
-  data <- read.csv(file)
     
-    # Sort the data based on the correct_order
-    data <- data[match(correct_order, data$household_code), ]
-
-    # Write the modified data back to the same CSV file
-    modified_file <- gsub("\\.csv$", "_m.csv", file)  # Add a suffix to the file name
-  write.csv(data, modified_file, row.names = FALSE)
-  
-  cat("Saved modified data to:", modified_file, "\n")
+    # Add a suffix to the file name
+    modified_file <- gsub("\\.csv$", "_m.csv", basename(file))
+    
+    # Define file path where we will be writing out our newly modified files
+    file_path <- file.path(osw_modified_data_folder, modified_file)
+    
+    # Write out files
+    write.csv(data, file_path, row.names = FALSE)
+    
+    # Build in check to show modified file has been saved
+    cat("Saved modified data to:", modified_file, "\n")
+    
 }
 
 ```
-
