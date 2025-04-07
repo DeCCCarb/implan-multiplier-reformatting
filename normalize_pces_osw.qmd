@@ -3,6 +3,9 @@ title: "normalize_pces_osw"
 format: html
 ---
 
+The purpose of this .qmd is to normalize the personal consumption expenditures multipliers for offshore wind. When inputting the multipliers into JEDI, just like all of the other multipliers, they are meant to add up to one. For some reason, only for this column, IMPLAN has the multipliers "un-normalized", so they are in their full form. In order to get them in the correct format, we need to normalize them to all add up to 1. 
+
+To begin, as always, we have to load our necessary libraries.
 ```{r}
 # Load libraries
 library(here)
@@ -10,6 +13,10 @@ library(tidyverse)
 library(janitor)
 ```
 
+Next, we are going to read in the data for each of our pce files (one for each county). We are only interested in three columns:
+- `..2` which we will rename to `code`. This is the commodity code, which is a unique identifier for goods and services
+- `Household Code` which we will rename to `household_code`. This tells us the category of the pce. 
+- `..13` which we will rename to `pce_dollar`. This gives us the dollar amount of the pce. This column is in dollar format, so we need to transform it to be numeric and get rid of the dollar sign and commas. 
 ```{r}
 # Set option to prevent scientific notation
 options(scipen=999)
@@ -63,6 +70,9 @@ pce_ventura <- read_csv(here("data","osw-pce", "osw-multipliers-ventura-pce.csv"
            pce_dollar = as.numeric(pce_dollar))
 ```
 
+Now that we have our pce in the correct format, we want to actually normalize it. To do this, we are going to take the the sum of all the whole column and divide the current value by that sum. This will give us the percentage of the whole. 
+
+Lastly, we are going to write out the modified files to our folders with the extension `-norm` to denote that they have been normalized. 
 ```{r}
 # Normalize pce_dollar to a percentage
 pce_sb$pce_percent <- pce_sb$pce_dollar / sum(pce_sb$pce_dollar)
