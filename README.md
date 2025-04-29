@@ -14,25 +14,81 @@ Repository containing code for reading in IMPLAN multipliers and getting them in
 ```bash
 ├── data/
 │   ├── osw-multipliers-modified/
-│   │   ├── osw-mutlipliers-sb-earnings_m.csv
-│   │   ├── osw-mutlipliers-slo-earnings_m.csv
-│   │   ├── osw-mutlipliers-v-earnings_m.csv
-│   │   ├── osw-mutlipliers-sb-jobs_m.csv
-│   │   ├── osw-mutlipliers-slo-jobs_m.csv
-│   │   ├── osw-mutlipliers-v-jobs_m.csv
-│   │   ├── osw-mutlipliers-sb-value_m.csv
-│   │   ├── osw-mutlipliers-slo-value_m.csv
-│   │   ├── osw-mutlipliers-v-value_m.csv
-│   │   ├── osw-mutlipliers-sb-output_m.csv
-│   │   ├── osw-mutlipliers-sb-output_m.csv
-│   │   ├── osw-mutlipliers-sb-output_m.csv
-│   │   ├── osw-mutlipliers-sb-total-value_m.csv
-│   │   ├── osw-mutlipliers-sb-total-value_m.csv
-│   │   ├── osw-mutlipliers-sb-total-value_m.csv
-│   │   ├── osw-mutlipliers-sb-earnings_m.csv
+│   │   ├── osw-multipliers-ccc-earnings_m.csv
+│   │   ├── osw-multipliers-ccc-jobs_m.csv
+│   │   ├── osw-multipliers-ccc-output_m.csv
+│   │   ├── osw-multipliers-ccc-total-value_m.csv
+│   │   ├── osw-multipliers-sb-earnings_m.csv
+│   │   ├── osw-multipliers-sb-jobs_m.csv
+│   │   ├── osw-multipliers-sb-output_m.csv
+│   │   ├── osw-multipliers-sb-total-value_m.csv
+│   │   ├── osw-multipliers-slo-earnings_m.csv
+│   │   ├── osw-multipliers-slo-jobs_m.csv
+│   │   ├── osw-multipliers-slo-output_m.csv
+│   │   ├── osw-multipliers-slo-total-value_m.csv
+│   │   ├── osw-multipliers-ventura-earnings_m.csv
+│   │   ├── osw-multipliers-ventura-jobs_m.csv
+│   │   ├── osw-multipliers-ventura-output_m.csv
+│   │   ├── osw-multipliers-ventura-total-value_m.csv
+│   │   ├── sb-pce-norm_m.csv
+│   │   ├── slo-pce-norm_m.csv
+│   │   ├── ventura-pce-norm_m.csv
 │   ├── osw-multipliers-raw/
+│   │   ├── osw-multipliers-ccc-earnings.csv
+│   │   ├── osw-multipliers-ccc-jobs.csv
+│   │   ├── osw-multipliers-ccc-output.csv
+│   │   ├── osw-multipliers-ccc-total-value.csv
+│   │   ├── osw-multipliers-sb-earnings.csv
+│   │   ├── osw-multipliers-sb-jobs.csv
+│   │   ├── osw-multipliers-sb-output.csv
+│   │   ├── osw-multipliers-sb-total-value.csv
+│   │   ├── osw-multipliers-slo-earnings.csv
+│   │   ├── osw-multipliers-slo-jobs.csv
+│   │   ├── osw-multipliers-slo-output.csv
+│   │   ├── osw-multipliers-slo-total-value.csv
+│   │   ├── osw-multipliers-ventura-earnings.csv
+│   │   ├── osw-multipliers-ventura-jobs.csv
+│   │   ├── osw-multipliers-ventura-output.csv
+│   │   ├── osw-multipliers-ventura-total-value.csv
+│   │   ├── sb-pce-norm.csv
+│   │   ├── slo-pce-norm.csv
+│   │   ├── ventura-pce-norm.csv
 │   ├── osw-pce/
+│   │   ├── osw-multipliers-sb-pce.csv
+│   │   ├── osw-multipliers-slo-pce.csv
+│   │   ├── osw-multipliers-ventura-pce.csv
 │   ├── pv-multipliers-modified/
+│   │   ├── sb-earnings_m.csv
+│   │   ├── sb-jobs_m.csv
+│   │   ├── sb-output_m.csv
+│   │   ├── sb-pce-norm_m.csv
+│   │   ├── sb-value_m.csv
+│   │   ├── slo-earnings_m.csv
+│   │   ├── slo-jobs_m.csv
+│   │   ├── slo-output_m.csv
+│   │   ├── slo-pce-norm_m.csv
+│   │   ├── slo-value_m.csv
+│   │   ├── ventura-earnings_m.csv
+│   │   ├── ventura-jobs_m.csv
+│   │   ├── ventura-output_m.csv
+│   │   ├── ventura-pce-norm_m.csv
+│   │   ├── ventura-value_m.csv
+│   ├── pv-multipliers-raw/
+│   │   ├── sb-earnings.csv
+│   │   ├── sb-jobs.csv
+│   │   ├── sb-output.csv
+│   │   ├── sb-pce-norm.csv
+│   │   ├── sb-value.csv
+│   │   ├── slo-earnings.csv
+│   │   ├── slo-jobs.csv
+│   │   ├── slo-output.csv
+│   │   ├── slo-pce-norm.csv
+│   │   ├── slo-value.csv
+│   │   ├── ventura-earnings.csv
+│   │   ├── ventura-jobs.csv
+│   │   ├── ventura-output.csv
+│   │   ├── ventura-pce-norm.csv
+│   │   ├── ventura-value.csv
 │   └── .DS_Store
 ├── osw_construction_files/
 │   ├── figure-html/
