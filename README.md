@@ -88,8 +88,7 @@ Repository containing code for reading in IMPLAN multipliers and getting them in
 │   │   ├── ventura-jobs.csv
 │   │   ├── ventura-output.csv
 │   │   ├── ventura-pce-norm.csv
-│   │   ├── ventura-value.csv
-│   └── .DS_Store
+│   │   └── ventura-value.csv
 ├── osw_construction_files/
 │   ├── figure-html/
 │   │   └── unnamed-chunk-4-1.png
@@ -108,7 +107,6 @@ Repository containing code for reading in IMPLAN multipliers and getting them in
 │   │   │   ├── quarto.js
 │   │   │   ├── tippy.css
 │   │   │   └── tippy.umd.min.js
-├── .DS_Store
 ├── .gitignore
 ├── README.md
 ├── normalize_pces_osw.qmd
